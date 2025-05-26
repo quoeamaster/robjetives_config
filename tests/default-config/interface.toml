@@ -1,0 +1,10 @@
+[[systems]]
+name = "msg-queue"
+url = "http://localhost:8090"
+user = "guest"
+password = "guest"
+
+[[systems]]
+name = "mem-cache"
+url = "http://localhost:9897"
+user = "root"

@@ -1,0 +1,6 @@
+name = "fancy-app-mysql"
+user = "deborah"
+password = "guide-post-hk"
+
+[app]
+license = "AGPL-3.0"

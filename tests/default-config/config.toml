@@ -1,0 +1,9 @@
+name = "my-sql-connector"
+url = "http://localhost:3125"
+user = "root"
+password = "password"
+retry = 5
+
+[app]
+name = "test-app"
+license = "MIT"

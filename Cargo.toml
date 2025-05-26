@@ -1,10 +1,20 @@
 [package]
-name = "robjetives_config-cargo"
+name = "robjetives_config"
 version = "0.1.0"
 edition = "2021"
+authors = ["Takara-Mono <quoeamaster@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+repository = "https://github.com/quoeamaster/robjetives_config"
+homepage = "https://github.com/quoeamaster/robjetives_config"
+description = """
+A modern and efficient configuration management system for your applications.
+"""
+categories = ["config", "configuration", "development-tools"]
+keywords = ["config", "configuration", "init", "toml", "yaml", "json"]
 
-[dependencies]
+[dev-dependencies]
 toml = "0.8"
 serde = { version = "1.0", features = ["derive"] }
-dotenvy = "0.15"
+# dotenvy = "0.15"
 getset = "0.1"
