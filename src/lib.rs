@@ -54,6 +54,58 @@ fn read_file_content(path: &path::PathBuf) -> io::Result<String> {
     Ok(util::read_config_file(path).unwrap())
 }
 
+/// trait for back-filling.
+pub trait BackFillable {
+    /// back fill the current object with another object of the same type named "from".
+    fn back_fill(&mut self, from: &Self);
+}
+
+/*
+#[macro_export]
+/// a macro to generate getter method for a struct.
+/// 
+/// Usage:
+/// field_accessor!(MyStruct, { age, decimal_value, name, })
+/// 
+/// example:
+/// struct MyStruct {
+///     age: u8,
+///     name: &str,
+///     decimal_value: float16,
+/// }
+/// 
+/// field_accessor!(MyStruct, { age, decimal_value, name, });
+/// 
+/// let my_struct = MyStruct { age: 12, name: "John", decimal_value: 3.14 };
+/// 
+/// assert_eq!(my_struct.get_field_value("name").unwrap(), "John");
+/// assert_eq!(my_struct.get_field_value("age").unwrap(), 12);
+/// assert_eq!(my_struct.get_field_value("decimal_value").unwrap(), 3.14);
+/// assert_ne!(my_struct.get_field_value("name").unwrap(), "John");
+macro_rules! field_accessor {
+    // macro definition (parameters and declaration syntax)
+    // ident = identifier (e.g. struct name, variable name)
+    // $(,)? = optional trailing comma
+    //
+    // usage example: field_accessor!(MyStruct, { field1, field2, field3, })
+    ($struct_name:ident, { $($field:ident),* $(,)? }) => {
+        // add an impl block to the struct
+        impl $struct_name {
+            pub fn get_field_value(&self, field: &str) -> Option<&str> {
+                match field {
+                    // generate code for each field
+                    // the value part would be call self.$field.as_deref() simply 
+                    // -> the actual value of the field after dereferencing.
+                    $( stringify!($field) => self.$field.as_deref(), )*
+                    // all others field(s) available in the struct 
+                    // but not declared in the macro would be treated as None.
+                    _ => None,
+                }
+            }
+        }
+    };
+}
+*/
 
 
 #[cfg(test)]
@@ -78,5 +130,23 @@ mod tests {
             _ => assert!(false),
         }
     }
+
+    /*
+    #[test]
+    /// provide a folder with one matching config file(s). Expect NO error but ONE sized HashMap.
+    fn macro_field_accessor_test() {
+
+        #[derive(PartialEq, Eq, PartialOrd, Ord)]
+        struct MyStruct {
+            name: String,
+        }
+        
+        field_accessor!(MyStruct, { name, });
+        
+        let my_struct = MyStruct {  name: "John".to_string() };
+        assert_eq!(my_struct.get_field_value("name").unwrap(), "John");
+        assert_ne!(my_struct.get_field_value("name").unwrap(), "Peter-Son*3");   
+    }
+    */
 
 }
